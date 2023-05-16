@@ -9,7 +9,7 @@ interface Props{
     post:Post
 }
 
-interface IFormInput{
+type FormValues =  {
     _id: string
     name: string
     email: string
@@ -18,9 +18,9 @@ interface IFormInput{
 
 const Post = ({ post }: Props) => {
     const [submitted,setSubmitted]=useState(false)
-    const  {register, handleSubmit, formState:{errors} } = useForm()
+    const  {register, handleSubmit, formState:{errors} } = useForm<FormValues>()
     
-    const onSubmit: SubmitHandler<IFormInput> =  (data) => {
+    const onSubmit: SubmitHandler<FormValues> =  (data) => {
         fetch('/api/createComment',{
             method:'POST',
             body: JSON.stringify(data)
